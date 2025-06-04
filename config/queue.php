@@ -106,4 +106,6 @@ return [
         'table' => 'failed_jobs',
     ],
 
+    "notification_channel"=>"notifications"
+
 ];

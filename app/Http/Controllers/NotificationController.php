@@ -35,7 +35,7 @@ class NotificationController extends Controller
                 'message'=>$request->message,
             ]);
             
-            Redis::publish('notifications',json_encode([
+            Redis::publish(config('queue.notification_channel','notifications'),json_encode([
                 'id'=>$notification->id,
                 'user_id'=>$notification->user_id,
                 'message'=>$notification->message,
@@ -85,7 +85,7 @@ class NotificationController extends Controller
         return [
             'total'=>Notification::count(),
             'processed'=>Notification::where('status','processed')->count(),
-            'processed'=>Notification::where('status','failed')->count()
+            'failed'=>Notification::where('status','failed')->count()
         ];
     }
 }
