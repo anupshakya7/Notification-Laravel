@@ -49,4 +49,43 @@ class NotificationController extends Controller
         }
         
     }
+
+    public function updateNotificationStatus(Request $request,$id){
+        try{
+            $validator = Validator::make($request->all(),[
+                'status'=>'required|in:processed,failed',
+            ]);
+    
+            if($validator->fails()){
+                return response()->json([
+                    'errors'=>$validator->errors()
+                ],422);
+            }
+    
+            $notification = Notification::findOrFail($id);
+
+            $notification->update([
+                'status'=>$request->status
+            ]);
+
+            Log::info('Successfully Updated Status Notification!!!');
+            return response()->json(['message'=>'Status Updated']);
+        }catch(Exception $e){
+            Log::error($e->getMessage());
+            return response()->json(['error'=>'Something went wrong']);
+        }
+        
+    }
+
+    public function recent(){
+        return Notification::orderByDesc('created_at')->limit(10)->get();
+    }
+
+    public function summary(){
+        return [
+            'total'=>Notification::count(),
+            'processed'=>Notification::where('status','processed')->count(),
+            'processed'=>Notification::where('status','failed')->count()
+        ];
+    }
 }

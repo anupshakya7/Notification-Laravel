@@ -21,20 +21,3 @@ Route::get('/', function () {
 });
 
 Route::post('/notifications',[NotificationController::class,'sendNotification']);
-
-Route::get('/test-redis',function(){
-    try{
-        $result = Redis::publish('notifications',json_encode([
-            'id'=>1,
-            'user_id'=>1,
-            'message'=>'This is a test message from laravel'
-        ]));
-        Log::info('Redis Publish Result: '.$result);
-
-        return 'Message Published!!!';
-    }catch(Exception $e){
-        Log::error('Redis error: '.$e->getMessage());
-        return 'Redis Failed';
-    }
-  
-});
