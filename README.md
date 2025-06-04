@@ -45,7 +45,7 @@ php artisan tinker
 php artisan serve
 
 ## Run Node Project for that I have write read.md seperately on that repo 
-
+## Hit these on Postman
 ## Send Notification
 POST /api/notifications 
 -> for creating notification
