@@ -1,8 +1,8 @@
 # Setup Instructions
 
 ## Clone the Repository
-git clone https://github.com/your-username/laravel-notification-system.git
-cd laravel-notification-system
+git clone https://github.com/anupshakya7/Notification-Laravel.git
+cd Notification-Laravel
 
 ## Install Dependencies
 composer install
